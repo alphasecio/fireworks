@@ -58,7 +58,7 @@ if st.button("Generate"):
         elif option == "Text: 01 Yi Large":
           # Run yi-large model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
-              model="accounts/fireworks/models/yi-large",
+              model="accounts/yi-01-ai/models/yi-large",
               messages=[{
                   "role": "user",
                   "content": prompt,
