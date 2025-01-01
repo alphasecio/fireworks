@@ -1,2 +1,2 @@
 streamlit==1.40.2
-fireworks-ai==0.15.9
+fireworks-ai==0.15.10
