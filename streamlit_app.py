@@ -7,9 +7,10 @@ st.subheader("Fireworks Playground")
 with st.sidebar:
   fireworks_api_key = st.text_input("Fireworks API Key", type="password")
   option = st.selectbox("Select Model", [
-    "Text: Meta Llama 3 70B Instruct",
+    "Text: Meta Llama 3.3 70B Instruct",
     "Text: Google Gemma 2 9B Instruct",
     "Text: Mixtral MoE 8x7B Instruct",
+    "Text: DeepSeek V3",
     "Text: 01 Yi Large",
     "Image: Stable Diffusion XL"]
     )
@@ -25,10 +26,10 @@ if st.button("Generate"):
     try:
       with st.spinner("Please wait..."):
         fireworks.client.api_key = fireworks_api_key
-        if option == "Text: Meta Llama 3 70B Instruct":
-          # Run llama-v3-70b-instruct model on Fireworks AI
+        if option == "Text: Meta Llama 3.3 70B Instruct":
+          # Run llama-v3p3-70b-instruct model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
-              model="accounts/fireworks/models/llama-v3-8b-instruct",
+              model="accounts/fireworks/models/llama-v3p3-70b-instruct",
               messages=[{
                   "role": "user",
                   "content": prompt,
@@ -37,18 +38,29 @@ if st.button("Generate"):
           st.success(response.choices[0].message.content)
         elif option == "Text: Google Gemma 2 9B Instruct":
           # Run gemma2-9b-it model on Fireworks AI
+          #response = fireworks.client.ChatCompletion.create(
+          #    model="accounts/fireworks/models/gemma2-9b-it",
+          #    messages=[{
+          #        "role": "user",
+          #        "content": prompt,
+          #    }],
+          #)
+          #st.success(response.choices[0].message.content)
+          st.error("This model is currently unavailable in serverless mode.")
+        elif option == "Text: Mixtral MoE 8x7B Instruct":
+          # Run mixtral-8x7b-instruct model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
-              model="accounts/fireworks/models/gemma2-9b-it",
+              model="accounts/fireworks/models/mixtral-8x7b-instruct",
               messages=[{
                   "role": "user",
                   "content": prompt,
               }],
           )
           st.success(response.choices[0].message.content)
-        elif option == "Text: Mixtral MoE 8x7B Instruct":
-          # Run mixtral-8x7b-instruct model on Fireworks AI
+        elif option == "Text: DeepSeek V3":
+          # Run deepseek-v3 model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
-              model="accounts/fireworks/models/mixtral-8x7b-instruct",
+              model="accounts/fireworks/models/deepseek-v3",
               messages=[{
                   "role": "user",
                   "content": prompt,
