@@ -9,7 +9,7 @@ with st.sidebar:
   option = st.selectbox("Select Model", [
     "Text: Meta Llama 3.3 70B Instruct",
     "Text: Google Gemma 2 9B Instruct",
-    "Text: Mixtral MoE 8x7B Instruct",
+    "Text: Mixtral MoE 8x22B Instruct",
     "Text: DeepSeek V3",
     "Text: 01 Yi Large",
     "Image: Stable Diffusion XL"]
@@ -47,10 +47,10 @@ if st.button("Generate"):
           #)
           #st.success(response.choices[0].message.content)
           st.error("This model is currently unavailable in serverless mode.")
-        elif option == "Text: Mixtral MoE 8x7B Instruct":
-          # Run mixtral-8x7b-instruct model on Fireworks AI
+        elif option == "Text: Mixtral MoE 8x22B Instruct":
+          # Run mixtral-8x22b-instruct model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
-              model="accounts/fireworks/models/mixtral-8x7b-instruct",
+              model="accounts/fireworks/models/mixtral-8x22b-instruct",
               messages=[{
                   "role": "user",
                   "content": prompt,
