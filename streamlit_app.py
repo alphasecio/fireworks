@@ -16,10 +16,12 @@ with st.sidebar:
     )
 
 os.environ["FIREWORKS_API_KEY"] = fireworks_api_key
-prompt = st.text_input("Prompt", label_visibility="collapsed")
+col1, col2 = st.columns([4, 1])
+prompt = col1.text_input("Prompt", label_visibility="collapsed")
+submit = col2.button("Submit")
 
-# If Generate button is clicked
-if st.button("Generate"):
+# If Submit button is clicked
+if submit:
   if not fireworks_api_key.strip() or not prompt.strip():
     st.error("Please provide the missing fields.")
   else:
