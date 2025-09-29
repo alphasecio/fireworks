@@ -3,10 +3,11 @@
 
 This repository showcases a simple Streamlit app for running the following open-source text and image generation models on Fireworks AI:
 * Text: Meta Llama 3.3 70B Instruct
-* Text: Google Gemma 2 9B Instruct *(currently unavailable in serverless mode)*
+* Text: Google Gemma 3 27B Instruct *(currently unavailable in serverless mode)*
+* Text: OpenAI gpt-oss 20B *(new)*
 * Text: Mixtral MoE 8x7B Instruct
-* Text: DeepSeek V3 *(new)*
-* Text: 01 Yi Large
+* Text: DeepSeek V3
+* Text: Qwen3 30B-A3B *(new)*
 * Image: Stable Diffusion XL
 
 ![fireworks-sdxl](./fireworks-sdxl.png)
