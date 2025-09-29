@@ -8,10 +8,11 @@ with st.sidebar:
   fireworks_api_key = st.text_input("Fireworks API Key", type="password")
   option = st.selectbox("Select Model", [
     "Text: Meta Llama 3.3 70B Instruct",
-    "Text: Google Gemma 2 9B Instruct",
+    "Text: Google Gemma 3 27B Instruct",
+    "Text: OpenAI gpt-oss 20B",
     "Text: Mixtral MoE 8x22B Instruct",
     "Text: DeepSeek V3",
-    "Text: 01 Yi Large",
+    "Text: Qwen3 30B-A3B",
     "Image: Stable Diffusion XL"]
     )
 
@@ -38,10 +39,10 @@ if submit:
               }],
           )
           st.success(response.choices[0].message.content)
-        elif option == "Text: Google Gemma 2 9B Instruct":
-          # Run gemma2-9b-it model on Fireworks AI
+        elif option == "Text: Google Gemma 3 27B Instruct":
+          # Run gemma-3-27b-it model on Fireworks AI
           #response = fireworks.client.ChatCompletion.create(
-          #    model="accounts/fireworks/models/gemma2-9b-it",
+          #    model="accounts/fireworks/models/gemma-3-27b-it",
           #    messages=[{
           #        "role": "user",
           #        "content": prompt,
@@ -49,6 +50,16 @@ if submit:
           #)
           #st.success(response.choices[0].message.content)
           st.error("This model is currently unavailable in serverless mode.")
+        elif option == "Text: OpenAI gpt-oss 20B":
+          # Run gpt-oss-20b model on Fireworks AI
+          response = fireworks.client.ChatCompletion.create(
+              model="accounts/fireworks/models/gpt-oss-20b",
+              messages=[{
+                  "role": "user",
+                  "content": prompt,
+              }],
+          )
+          st.success(response.choices[0].message.content)
         elif option == "Text: Mixtral MoE 8x22B Instruct":
           # Run mixtral-8x22b-instruct model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
@@ -69,10 +80,10 @@ if submit:
               }],
           )
           st.success(response.choices[0].message.content)
-        elif option == "Text: 01 Yi Large":
-          # Run yi-large model on Fireworks AI
+        elif option == "Text: Qwen3 30B-A3B":
+          # Run qwen3-30b-a3b model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
-              model="accounts/yi-01-ai/models/yi-large",
+              model="accounts/fireworks/models/qwen3-30b-a3b",
               messages=[{
                   "role": "user",
                   "content": prompt,
