@@ -1,4 +1,5 @@
-import os, streamlit as st
+import os
+import streamlit as st
 import fireworks.client
 from fireworks.client.image import ImageInference, Answer
 
@@ -11,7 +12,7 @@ with st.sidebar:
     "Text: Google Gemma 3 27B Instruct",
     "Text: OpenAI gpt-oss 20B",
     "Text: Mixtral MoE 8x22B Instruct",
-    "Text: DeepSeek V3",
+    "Text: DeepSeek V3.1",
     "Text: Qwen3 30B-A3B",
     "Image: Stable Diffusion XL"]
     )
@@ -70,10 +71,10 @@ if submit:
               }],
           )
           st.success(response.choices[0].message.content)
-        elif option == "Text: DeepSeek V3":
+        elif option == "Text: DeepSeek V3.1":
           # Run deepseek-v3 model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
-              model="accounts/fireworks/models/deepseek-v3",
+              model="accounts/fireworks/models/deepseek-v3p1",
               messages=[{
                   "role": "user",
                   "content": prompt,
