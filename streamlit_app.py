@@ -3,11 +3,18 @@ import streamlit as st
 import fireworks.client
 from fireworks.client.image import ImageInference, Answer
 
+st.set_page_config(
+    page_title="Fireworks Playground",
+    page_icon="🎆",
+    layout="centered"
+)
+
 # Streamlit app
-st.subheader("Fireworks Playground")
+st.subheader("🎆 Fireworks Playground")
 with st.sidebar:
-  fireworks_api_key = st.text_input("Fireworks API Key", type="password")
-  option = st.selectbox("Select Model", [
+  st.subheader("⚙️ Settings")
+  fireworks_api_key = st.text_input("Fireworks API key", type="password", help="Get your key [here](https://fireworks.ai/settings/users/api-keys)")
+  option = st.selectbox("Select serverless model", [
     "Text: Meta Llama 3.3 70B Instruct",
     "Text: Google Gemma 3 27B Instruct",
     "Text: OpenAI gpt-oss 20B",
@@ -17,19 +24,22 @@ with st.sidebar:
     "Image: Stable Diffusion XL"]
     )
 
-os.environ["FIREWORKS_API_KEY"] = fireworks_api_key
 col1, col2 = st.columns([4, 1])
 prompt = col1.text_input("Prompt", label_visibility="collapsed")
 submit = col2.button("Submit")
 
 # If Submit button is clicked
 if submit:
-  if not fireworks_api_key.strip() or not prompt.strip():
-    st.error("Please provide the missing fields.")
+  if not fireworks_api_key.strip():
+    st.warning("⚠️ Please enter your Fireworks API key in the sidebar.")
+  elif not prompt.strip():
+    st.warning("⚠️ Please enter a prompt.")
   else:
     try:
       with st.spinner("Please wait..."):
         fireworks.client.api_key = fireworks_api_key
+        os.environ["FIREWORKS_API_KEY"] = fireworks_api_key
+        
         if option == "Text: Meta Llama 3.3 70B Instruct":
           # Run llama-v3p3-70b-instruct model on Fireworks AI
           response = fireworks.client.ChatCompletion.create(
